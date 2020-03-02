@@ -1,5 +1,7 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
+const counter = document.getElementById('txt');
+const button = document.getElementById('btn1');
 
 const width = canvas.width = window.innerWidth;
 const height = canvas.height = window.innerHeight;
@@ -56,7 +58,10 @@ Ball.prototype.update = function() {
         const distance = Math.sqrt(dx * dx + dy * dy);
   
         if (distance < this.size + balls[j].size) {
-          balls[j].color = this.color = 'rgb(' + random(0, 255) + ',' + random(0, 255) + ',' + random(0, 255) +')';
+        //changes color when balls collide
+        //   balls[j].color = this.color = 'rgb(' + random(50, 255) + ',' + random(50, 255) + ',' + random(50,100) +')';
+        //changes ball size when balls collide
+          balls[j].size = this.size = random(10,40)
         }
       }
     }
@@ -73,7 +78,7 @@ Ball.prototype.update = function() {
       random(0 + size,height - size),
       random(-7,7),
       random(-7,7),
-      'rgb(' + random(0,255) + ',' + random(0,255) + ',' + random(0,255) +')',
+      'rgb(' + random(50,255) + ',' + random(50,255) + ',' + random(50,255) +')',
       size
     );
   
