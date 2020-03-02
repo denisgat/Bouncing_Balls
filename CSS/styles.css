@@ -12,10 +12,10 @@ html, body {
     height: inherit;
   }
   
-  h1 {
+  h1{
     font-size: 2rem;
     letter-spacing: -1px;
-    position: absolute;
     text-shadow: 0 0 4px white;
+    position: absolute;
   }
 
