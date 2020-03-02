@@ -13,14 +13,66 @@ function random(min,max) {
   return num;
 }
 
-function Ball(x, y, velX, velY, color, size) {
+function Shape(x, y, velX, velY,exists) {
     this.x = x;
     this.y = y;
     this.velX = velX;
     this.velY = velY;
-    this.color = color;
-    this.size = size;
+    this.exists = exists;
+
   }
+
+  function Ball(x, y, velX, velY,exists, color, size) {
+      Shape.call(this,x, y, velX, velY,exists);
+      this.color = color;
+      this.size = size;
+
+  }
+
+function EvilCircle(x,y,velX,velY,exists){
+  Shape.call(this,x,y,20,20,exists);
+  this.color = 'white';
+  this.size = 10;
+}
+
+//gets Ball() to inherit the methods defined on the Shape()'s prototype
+  Ball.prototype = Object.create(Shape.prototype);
+
+//gets EvilCircle to inherit the methods defined on teh Shape Prototype
+  EvilCircle.prototype = Object.create(Shape.prototype);
+
+EvilCircle.prototype.draw() = function(){
+  ctx.beginPath();
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = this.color;
+  ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+  ctx.stroke();
+}
+
+EvilCircle.prototype.checkBounds() = function(){
+  if ((this.x + this.size) >= width) {
+    this.x = 0;
+  }
+
+  if ((this.x - this.size) <= 0) {
+    this.x = width;
+  }
+
+  if ((this.y + this.size) >= height) {
+    this.y = 0;
+  }
+
+  if ((this.y - this.size) <= 0) {
+    this.y = height;
+  }
+
+EvilCircle.prototype.setControls() = function(){
+
+}
+
+EvilCircle.prototype.collisionDetect() = function(){
+
+}
 
 Ball.prototype.draw = function() {
     ctx.beginPath();
@@ -30,22 +82,22 @@ Ball.prototype.draw = function() {
   }
 
 Ball.prototype.update = function() {
-    if ((this.x + this.size) >= width) {
-      this.velX = -(this.velX);
-    }
-  
-    if ((this.x - this.size) <= 0) {
-      this.velX = -(this.velX);
-    }
-  
-    if ((this.y + this.size) >= height) {
-      this.velY = -(this.velY);
-    }
-  
-    if ((this.y - this.size) <= 0) {
-      this.velY = -(this.velY);
-    }
-  
+  if ((this.x + this.size) >= width) {
+    this.size = -(this.size);
+  }
+
+  if ((this.x - this.size) <= 0) {
+    this.velX = -(this.velX);
+  }
+
+  if ((this.y + this.size) >= height) {
+    this.velY = -(this.velY);
+  }
+
+  if ((this.y - this.size) <= 0) {
+    this.velY = -(this.velY);
+  }
+} 
     this.x += this.velX;
     this.y += this.velY;
   }
@@ -78,6 +130,7 @@ Ball.prototype.update = function() {
       random(0 + size,height - size),
       random(-7,7),
       random(-7,7),
+      exists = true,
       'rgb(' + random(50,255) + ',' + random(50,255) + ',' + random(50,255) +')',
       size
     );
