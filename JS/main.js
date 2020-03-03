@@ -38,7 +38,7 @@ function Ball(x, y, velX, velY, exists, color, size) {
 // EvilCircle Constructor
 
 function EvilCircle(x, y, velX, velY, exists) {
-  Shape.call(this, x, y, 20, 20, exists);
+  Shape.call(this, x, y, velX, velY, exists);
   this.color = 'white';
   this.size = 10;
 }
@@ -169,7 +169,7 @@ Ball.prototype.collisionDetect = function () {
 
 let balls = [];
 
-while (balls.length < 2) {
+while (balls.length < 10) {
   let size = random(20, 40);
   let ball = new Ball(
     // ball position always drawn at least one ball width
@@ -186,7 +186,7 @@ while (balls.length < 2) {
   balls.push(ball);
 }
 
-let Evil = new EvilCircle(width / 2, height / 2, 20, 20, true, 'white', 10);
+let Evil = new EvilCircle(width / 2, height / 2, 30, 30, true, 'white', 10);
 
 ctx.fillStyle = 'rgba(0, 0, 0, .25)';
 ctx.fillRect(0, 0, width, height);
@@ -213,7 +213,7 @@ function loop() {
     }
   }
 
-  if (con == 0) {
+  if (con === 0) {
     clearInterval(finale)
   }  
 
@@ -242,9 +242,6 @@ function start() {
   loop();
 }
 
-// if (con == 0){
-//   stop();
-// }
 
 button1.onclick = start;
 
