@@ -3,6 +3,7 @@ const ctx = canvas.getContext('2d');
 let counter = document.getElementById('txt');
 const button1 = document.getElementById('btn1');
 const button2 = document.getElementById('btn2');
+let timer = document.getElementById('timer')
 
 
 const width = canvas.width = window.innerWidth;
@@ -191,7 +192,7 @@ ctx.fillRect(0, 0, width, height);
 function loop() {
   ctx.fillStyle = 'rgba(0, 0, 0, 1)';
   ctx.fillRect(0, 0, width, height);
- 
+
   Evil.draw();
   Evil.checkBounds();
   Evil.setControls();
@@ -205,38 +206,46 @@ function loop() {
     }
     if (balls[i].exists == false){
       con -= 1;
+    
     }
   }
+
   counter.innerHTML = `Ball count: ${con}`;
-  
+  if(con == 0){
+    clearInterval(finale);
+  }
   requestAnimationFrame(loop);
 }
 
 // loop();
 
 
-let sec = 0
-let minutes = 0
+
+
+
+
+let sec = 0;
+let minutes = 0;
+
 function time(){
   sec = sec + 1 
-   minutes = minutes + Math.floor(sec/60)
+  minutes = minutes + Math.floor(sec/60)
   if(sec > 59){
-    sec = sec - minutes * 60
+    sec = sec - minutes * 60;
   }
+  timer.innerHTML = "Timer: " + ("0" + minutes).slice(-2) + ":" + ("0" + sec).slice(-2)
 }
 
-time.innerHTML = ("0" + minutes).slice(-2) + ":" + ("0" + sec).slice(-2)
 
 function start(){
-  setInterval(time,1000)
+  let finale = setInterval(time,1000);
   loop();
 }
 
-function reset(){
-  setTimeout(time)
-  break;
-}
 
-button1.onclick = start;
-button2.onclick = reset;
+
+
+
+
+ button1.onclick = start;
 
