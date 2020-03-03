@@ -46,19 +46,21 @@ function EvilCircle(x, y, velX, velY, exists) {
 //gets Ball() to inherit the methods defined on the Shape()'s prototype
 Ball.prototype = Object.create(Shape.prototype);
 
-Object.defineProperty(Ball.prototype, 'constructor', { 
-  value: Ball, 
+Object.defineProperty(Ball.prototype, 'constructor', {
+  value: Ball,
   enumerable: false, // so that it does not appear in 'for in' loop
-  writable: true });
+  writable: true
+});
 
 //gets EvilCircle to inherit the methods defined on the Shape Prototype
 EvilCircle.prototype = Object.create(Shape.prototype);
 
-Object.defineProperty(EvilCircle.prototype, 'constructor', { 
-  value: EvilCircle, 
+Object.defineProperty(EvilCircle.prototype, 'constructor', {
+  value: EvilCircle,
   enumerable: false, // so that it does not appear in 'for in' loop
-  writable: true });
-  
+  writable: true
+});
+
 // Evil Circle Methods 
 
 EvilCircle.prototype.draw = function () {
@@ -112,7 +114,7 @@ EvilCircle.prototype.collisionDetect = function () {
         //changes color when balls collide
         //   balls[j].color = this.color = 'rgb(' + random(50, 255) + ',' + random(50, 255) + ',' + random(50,100) +')';
         //changes ball size when balls collide
-        balls[j].exists =  false
+        balls[j].exists = false
       }
     }
   }
@@ -127,20 +129,20 @@ Ball.prototype.draw = function () {
   ctx.fill();
 }
 
-Ball.prototype.update = function() {
-  if((this.x + this.size) >= width) {
+Ball.prototype.update = function () {
+  if ((this.x + this.size) >= width) {
     this.velX = -(this.velX);
   }
 
-  if((this.x - this.size) <= 0) {
+  if ((this.x - this.size) <= 0) {
     this.velX = -(this.velX);
   }
 
-  if((this.y + this.size) >= height) {
+  if ((this.y + this.size) >= height) {
     this.velY = -(this.velY);
   }
 
-  if((this.y - this.size) <= 0) {
+  if ((this.y - this.size) <= 0) {
     this.velY = -(this.velY);
   }
 
@@ -186,11 +188,11 @@ while (balls.length < 2) {
 
 let Evil = new EvilCircle(width / 2, height / 2, 20, 20, true, 'white', 10);
 
-ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+ctx.fillStyle = 'rgba(0, 0, 0, .25)';
 ctx.fillRect(0, 0, width, height);
 
 function loop() {
-  ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+  ctx.fillStyle = 'rgba(0, 0, 0, .25)';
   ctx.fillRect(0, 0, width, height);
 
   Evil.draw();
@@ -199,19 +201,21 @@ function loop() {
   Evil.collisionDetect();
   let con = balls.length
 
+
   for (let i = 0; i < balls.length; i++) {
     if (balls[i].exists == true) {
       balls[i].draw();
       balls[i].update();
       balls[i].collisionDetect();
     }
-    if (balls[i].exists == false){
+    if (balls[i].exists == false) {
       con -= 1;
     }
   }
-      if (con == 0){
-        stop();
-      }
+
+  if (con == 0) {
+    clearInterval(finale)
+  }  
 
   counter.innerHTML = `Ball count: ${con}`;
   requestAnimationFrame(loop);
@@ -222,24 +226,25 @@ function loop() {
 let sec = 0;
 let minutes = 0;
 
-function time(){
-  sec = sec + 1 
-  minutes = minutes + Math.floor(sec/60)
-  if(sec > 59){
+function time() {
+  sec = sec + 1
+  minutes = minutes + Math.floor(sec / 60)
+  if (sec > 59) {
     sec = sec - minutes * 60;
   }
   timer.innerHTML = "Timer: " + ("0" + minutes).slice(-2) + ":" + ("0" + sec).slice(-2)
 }
 
+let finale;
 
-function start(){
-  let finale = setInterval(time,1000);
+function start() {
+  finale = setInterval(time, 1000);
   loop();
 }
 
-function stop(){
-  if(con==0)
-}
+// if (con == 0){
+//   stop();
+// }
 
- button1.onclick = start;
+button1.onclick = start;
 
