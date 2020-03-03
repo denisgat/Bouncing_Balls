@@ -185,11 +185,13 @@ while (balls.length < 10) {
 
 let Evil = new EvilCircle(width / 2, height / 2, 20, 20, true, 'white', 10);
 
-
+ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+ctx.fillRect(0, 0, width, height);
 
 function loop() {
   ctx.fillStyle = 'rgba(0, 0, 0, 1)';
   ctx.fillRect(0, 0, width, height);
+ 
   Evil.draw();
   Evil.checkBounds();
   Evil.setControls();
@@ -210,31 +212,31 @@ function loop() {
   requestAnimationFrame(loop);
 }
 
-loop();
+// loop();
 
 
-// let sec = 0
-// let minutes = 0
-// function time(){
-//   sec = sec + 1 
-//    minutes = minutes + Math.floor(sec/60)
-//   if(sec > 59){
-//     sec = sec - minutes * 60
-//   }
+let sec = 0
+let minutes = 0
+function time(){
+  sec = sec + 1 
+   minutes = minutes + Math.floor(sec/60)
+  if(sec > 59){
+    sec = sec - minutes * 60
+  }
+}
 
-// console.log(("0" + minutes).slice(-2) + ":" + ("0" + sec).slice(-2))
-// }
+time.innerHTML = ("0" + minutes).slice(-2) + ":" + ("0" + sec).slice(-2)
 
-// function start(){
-//   setInterval(time,1000)
-//   loop();
-// }
+function start(){
+  setInterval(time,1000)
+  loop();
+}
 
-// function reset(){
-//   setTimeout(time)
-//   break;
-// }
+function reset(){
+  setTimeout(time)
+  break;
+}
 
-// button1.onclick = start;
-// button2.onclick = reset;
+button1.onclick = start;
+button2.onclick = reset;
 
