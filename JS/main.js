@@ -1,6 +1,8 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
-const counter = document.getElementById('txt');
+let counter = document.getElementById('txt');
+const button1 = document.getElementById('btn1');
+const button2 = document.getElementById('btn2');
 
 
 const width = canvas.width = window.innerWidth;
@@ -184,6 +186,7 @@ while (balls.length < 10) {
 let Evil = new EvilCircle(width / 2, height / 2, 20, 20, true, 'white', 10);
 
 
+
 function loop() {
   ctx.fillStyle = 'rgba(0, 0, 0, 1)';
   ctx.fillRect(0, 0, width, height);
@@ -191,16 +194,47 @@ function loop() {
   Evil.checkBounds();
   Evil.setControls();
   Evil.collisionDetect();
-
+  let con = balls.length
   for (let i = 0; i < balls.length; i++) {
     if (balls[i].exists == true) {
       balls[i].draw();
       balls[i].update();
       balls[i].collisionDetect();
     }
+    if (balls[i].exists == false){
+      con -= 1;
+    }
   }
-
+  counter.innerHTML = `Ball count: ${con}`;
+  
   requestAnimationFrame(loop);
 }
 
 loop();
+
+
+// let sec = 0
+// let minutes = 0
+// function time(){
+//   sec = sec + 1 
+//    minutes = minutes + Math.floor(sec/60)
+//   if(sec > 59){
+//     sec = sec - minutes * 60
+//   }
+
+// console.log(("0" + minutes).slice(-2) + ":" + ("0" + sec).slice(-2))
+// }
+
+// function start(){
+//   setInterval(time,1000)
+//   loop();
+// }
+
+// function reset(){
+//   setTimeout(time)
+//   break;
+// }
+
+// button1.onclick = start;
+// button2.onclick = reset;
+

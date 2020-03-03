@@ -13,7 +13,7 @@ html, body {
   }
   
   h1{
-    font-size: 2rem;
+    font-size: 3rem;
     letter-spacing: -1px;
     text-shadow: 0 0 4px white;
     position: absolute;
@@ -22,12 +22,31 @@ html, body {
 
   p {
     position: absolute;
-    top: 40px;
+    font-size: 2rem;
+    top: 60px;
     left: 20px;
-    color: #aaa;
+    color: white;
+  }
+
+  #btn1 {
+    position: absolute;
+    font-size: 1.2rem;
+    top: 110px;
+    left: 20px;
+    width: 80px;
+    color: white;
+  }
+
+  #btn2 {
+    position: absolute;
+    font-size: 1.2rem;
+    top: 110px;
+    left: 120px;
+    width: 80px;
+    color: white;
   }
 
 
-  
+
 
 
