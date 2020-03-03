@@ -167,7 +167,7 @@ Ball.prototype.collisionDetect = function () {
 
 let balls = [];
 
-while (balls.length < 10) {
+while (balls.length < 2) {
   let size = random(20, 40);
   let ball = new Ball(
     // ball position always drawn at least one ball width
@@ -198,6 +198,7 @@ function loop() {
   Evil.setControls();
   Evil.collisionDetect();
   let con = balls.length
+
   for (let i = 0; i < balls.length; i++) {
     if (balls[i].exists == true) {
       balls[i].draw();
@@ -206,21 +207,15 @@ function loop() {
     }
     if (balls[i].exists == false){
       con -= 1;
-    
     }
   }
+      if (con == 0){
+        stop();
+      }
 
   counter.innerHTML = `Ball count: ${con}`;
-  if(con == 0){
-    clearInterval(finale);
-  }
   requestAnimationFrame(loop);
 }
-
-// loop();
-
-
-
 
 
 
@@ -242,10 +237,9 @@ function start(){
   loop();
 }
 
-
-
-
-
+function stop(){
+  if(con==0)
+}
 
  button1.onclick = start;
 
