@@ -1,7 +1,7 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 const counter = document.getElementById('txt');
-const button = document.getElementById('btn1');
+
 
 const width = canvas.width = window.innerWidth;
 const height = canvas.height = window.innerHeight;
@@ -42,17 +42,20 @@ function EvilCircle(x, y, velX, velY, exists) {
 
 //gets Ball() to inherit the methods defined on the Shape()'s prototype
 Ball.prototype = Object.create(Shape.prototype);
+
 Object.defineProperty(Ball.prototype, 'constructor', { 
   value: Ball, 
   enumerable: false, // so that it does not appear in 'for in' loop
   writable: true });
 
-//gets EvilCircle to inherit the methods defined on teh Shape Prototype
+//gets EvilCircle to inherit the methods defined on the Shape Prototype
 EvilCircle.prototype = Object.create(Shape.prototype);
+
 Object.defineProperty(EvilCircle.prototype, 'constructor', { 
   value: EvilCircle, 
   enumerable: false, // so that it does not appear in 'for in' loop
   writable: true });
+  
 // Evil Circle Methods 
 
 EvilCircle.prototype.draw = function () {
@@ -121,25 +124,26 @@ Ball.prototype.draw = function () {
   ctx.fill();
 }
 
-Ball.prototype.update = function () {
-  if ((this.x + this.size) >= width) {
-    this.size = -(this.size);
-  }
-
-  if ((this.x - this.size) <= 0) {
+Ball.prototype.update = function() {
+  if((this.x + this.size) >= width) {
     this.velX = -(this.velX);
   }
 
-  if ((this.y + this.size) >= height) {
+  if((this.x - this.size) <= 0) {
+    this.velX = -(this.velX);
+  }
+
+  if((this.y + this.size) >= height) {
     this.velY = -(this.velY);
   }
 
-  if ((this.y - this.size) <= 0) {
+  if((this.y - this.size) <= 0) {
     this.velY = -(this.velY);
   }
+
   this.x += this.velX;
   this.y += this.velY;
-}
+};
 
 Ball.prototype.collisionDetect = function () {
   for (let j = 0; j < balls.length; j++) {
@@ -186,7 +190,7 @@ function loop() {
   Evil.draw();
   Evil.checkBounds();
   Evil.setControls();
-  // Evil.collisionDetect();
+  Evil.collisionDetect();
 
   for (let i = 0; i < balls.length; i++) {
     if (balls[i].exists == true) {

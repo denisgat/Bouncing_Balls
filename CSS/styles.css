@@ -17,5 +17,14 @@ html, body {
     letter-spacing: -1px;
     text-shadow: 0 0 4px white;
     position: absolute;
+    left: 20px;
   }
+
+  p {
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    color: #aaa;
+  }
+
 
