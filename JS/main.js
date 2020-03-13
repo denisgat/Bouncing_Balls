@@ -188,7 +188,7 @@ while (balls.length < 10) {
 
 let Evil = new EvilCircle(width / 2, height / 2, 30, 30, true, 'white', 10);
 
-ctx.fillStyle = 'rgba(0, 0, 0, .25)';
+ctx.fillStyle = 'rgb(0, 0, 0)';
 ctx.fillRect(0, 0, width, height);
 
 function loop() {
